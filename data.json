@@ -1,0 +1,342 @@
+﻿ "Hop_xop": {
+    "ten": "Hộp xốp",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Hộp xốp mất hàng trăm năm để phân hủy nhưng chỉ mất vài phút để hại môi trường. Lần sau mình dùng hộp cá nhân bạn nhé!"
+  },
+  "Coc_nhua": {
+    "ten": "Cốc nhựa",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Một chiếc cốc nhựa chỉ dùng vài phút nhưng tồn tại hàng trăm năm trong môi trường. Hãy mang theo cốc cá nhân bằng thủy tinh hoặc inox để bảo vệ sức khỏe và giảm rác thải nhựa nhé!"
+  },
+  "Tui_xach_vai": {
+    "ten": "Túi xách vải",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Túi vải có thể sử dụng nhiều lần, giúp giảm đáng kể lượng túi ni-lông thải ra môi trường. Một thói quen nhỏ nhưng tạo nên thay đổi lớn cho Trái Đất."
+  },
+  "Ban_chai_nhua": {
+    "ten": "Bàn chải nhựa",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Bàn chải nhựa giúp làm sạch răng hiệu quả và bảo vệ nướu khi sử dụng đúng cách. Phân loại đúng nơi thu gom. Khi cần thay mới, có thể cân nhắc các lựa chọn thân thiện môi trường hơn."
+  },
+  "Dep_nhua": {
+    "ten": "Dép nhựa",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Sản phẩm có tuổi thọ cao. Hãy giữ gìn cẩn thận để dùng được lâu nhất có thể."
+  },
+  "Dua_nhua": {
+    "ten": "Đũa nhựa",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Nên dùng đũa gỗ, tre sử dụng lâu dài, tốt cho sức khỏe."
+  },
+  "Chen_su": {
+    "ten": "Chén sứ",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Sản phẩm dùng lâu dài. Hãy rửa sạch và tiếp tục sử dụng để giảm rác thải."
+  },
+  "Do_choi_tre_em_nhua": {
+    "ten": "Đồ chơi trẻ em nhựa",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Một món đồ chơi nhựa dùng vài tháng nhưng mất hàng trăm năm để biến mất. Chúng ta chọn đồ chơi bền vững không chỉ vì sức khỏe của bé hôm nay, mà còn để giữ cho bầu trời và mặt đất mai sau luôn xanh tươi cho chính các con"
+  },
+  "Mu_vai": {
+    "ten": "Mũ vải",
+    "level": "THẤP",
+    "cssClass": "badge-thap",
+    "tip": "Sản phẩm có độ bền cao. Hãy giặt sạch và sử dụng nhiều lần để bảo vệ môi trường."
+  },
+  "Muong_nhua": {
+    "ten": "Muỗng nhựa",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Muỗng nhựa tiện vài phút nhưng hại trăm năm. Hãy dùng muỗng sứ/inox để giảm thiểu hạt vi nhựa vào thức ăn. Mang thìa cá nhân — Góp xanh trường học bạn nhé!"
+  },
+  "Gang_tay_cao_su": {
+    "ten": "Găng tay cao su",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Tái sử dụng nhiều lần. Khi rách, có thể cắt nhỏ tái chế dùng làm dây thun cột đồ."
+  },
+  "Kep_sat": {
+    "ten": "Kẹp sắt",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Giữ gìn cẩn thận, tránh để rỉ sét để có thể tái sử dụng cho nhiều năm học tiếp theo."
+  },
+  "Bang_keo_ca_nhan": {
+    "ten": "Băng keo cá nhân",
+    "level": "THẤP",
+    "cssClass": "badge-thap",
+    "tip": "Phân loại vào rác thải y tế hoặc rác vô cơ sau khi sử dụng để đảm bảo vệ sinh."
+  },
+  "Lon_nuoc_ngot_bia_nhom": {
+    "ten": "Lon nước ngọt bia nhôm",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Ưu tiên nước tự pha bằng bình cá nhân. Nếu dùng lon nhôm, nhớ gom riêng để tái chế bảo vệ tài nguyên môi trường bạn nhé!"
+  },
+  "Chai_thuy_tinh": {
+    "ten": "Chai thủy tinh",
+    "level": "THẤP",
+    "cssClass": "badge-thap",
+    "tip": "Thủy tinh có thể tái chế 100%, cách tốt nhất để bảo vệ sức khỏe và môi trường bền vững. Rửa sạch để tái sử dụng hoặc gom chai lọ gửi đi tái chế."
+  },
+  "Ong_hut_nhua_dung_mot_lan": {
+    "ten": "Ong hut nhua dung mot lan",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Vị ngon sẽ trọn vẹn hơn khi không kèm rác thải nhựa. Một chiếc ống hút tre sẽ làm ly nước của bạn 'xanh' hơn hẳn đấy!"
+  },
+  "Ly_giay_dung_mot_lan": {
+    "ten": "Ly giấy dùng một lần",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Hạn chế ly giấy dùng một lần, ưu tiên mang bình giữ nhiệt cá nhân để giảm rác thải."
+  },
+  "Gao_dong_tui_nhua": {
+    "ten": "Gạo đóng túi nhựa",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Khi mua thực phẩm, hãy mang theo túi vải hoặc hộp đựng riêng. Giảm một chiếc túi nhựa hôm nay là giảm thêm một phần rác thải cho môi trường mai sau."
+  },
+  "Pin_tieu": {
+    "ten": "Pin tiểu",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Pin cũ là rác thải nguy hại, đừng vứt chung với rác thường bạn nhé. Hãy tìm điểm thu gom pin gần nhất để bảo vệ nguồn nước!"
+  },
+  "Khan_giay": {
+    "ten": "Khăn giấy",
+    "level": "THẤP",
+    "cssClass": "badge-thap",
+    "tip": "Hãy sử dụng khăn giấy hợp lý và tiết kiệm. Khi có thể, hãy thay thế bằng khăn vải để giảm lượng rác thải phát sinh mỗi ngày."
+  },
+  "Rau_cu_dong_goi_bang_mang_nhua": {
+    "ten": "Rau củ đóng gói bằng màng nhựa",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Ưu tiên rau củ bán rời hoặc mang theo túi tái sử dụng khi mua sắm. Hành động nhỏ này giúp giảm đáng kể lượng bao bì nhựa dùng một lần."
+  },
+  "Quan_ao_tu_soi_tu_nhien_cotton_huu_co_lanh": {
+    "ten": "Quần áo từ sợi tự nhiên cotton hữu cơ",
+    "level": "THẤP",
+    "cssClass": "badge-thap",
+    "tip": "Sợi tự nhiên rất thân thiện với môi trường. Khi không còn mặc vừa, hãy đem quyên góp hoặc cắt may lại thành túi tote nhỏ, giẻ lau để giảm rác thải nhé"
+  },
+  "Mang_boc_thuc_pham": {
+    "ten": "Màng bọc thực phẩm",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Hộp đựng thức ăn có nắp bằng thủy tinh có thể dùng lâu dài, chống chất vi nhựa"
+  },
+  "Kem_danh_rang_tuyp_nhua": {
+    "ten": "Kem đánh răng tuyp nhựa",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Hãy ưu tiên các sản phẩm có bao bì thân thiện môi trường hoặc dễ tái chế. Mỗi thay đổi nhỏ trong sinh hoạt đều góp phần giảm rác thải nhựa."
+  },
+  "Binh_nuoc_ca_nhan_inox": {
+    "ten": "Bình nước cá nhân inox",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Tuyệt vời quá! Bạn đang giúp Trái Đất giảm bớt hàng trăm chai nhựa mỗi năm đấy. Tiếp tục phát huy nhé!"
+  },
+  "Day_pin_sac": {
+    "ten": "Dây pin sạc",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Gom vào thùng rác điện tử (E-waste) khi bị hỏng để được xử lý và tái chế đúng cách."
+  },
+  "Xa_phong_banh_khong_bao_bi_nhua": {
+    "ten": "Xà phòng bánh không bao bì nhựa",
+    "level": "THẤP",
+    "cssClass": "badge-thap",
+    "tip": "Lựa chọn tuyệt vời! Giúp giảm thiểu đáng kể rác thải từ vỏ chai nhựa."
+  },
+  "Đua_go": {
+    "ten": "Đũa gỗ",
+    "level": "THẤP",
+    "cssClass": "badge-thap",
+    "tip": "Ưu tiên dùng đũa gỗ cá nhân để dùng nhiều lần thay vì đũa gỗ dùng một lần ngoài hàng quán để bảo vệ sức khỏe của bạn và hạn chế rác thải môi trường."
+  },
+  "But_bi_nhua": {
+    "ten": "Bút bi nhựa",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Hạn chế dùng bút nhựa dùng một lần, ưu tiên bút có thể thay ruột hoặc bút thân thiện môi trường."
+  },
+  "But_chi_go": {
+    "ten": "Bút chì gỗ",
+    "level": "THẤP",
+    "cssClass": "badge-thap",
+    "tip": "Lựa chọn tốt! Bút chì gỗ thân thiện môi trường và dễ phân hủy hơn nhựa."
+  },
+  "Thuoc_ke_nhua": {
+    "ten": "Thước kẻ nhựa",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Hạn chế sử dụng thước nhựa, ưu tiên thước gỗ dùng lâu dài."
+  },
+  "Thuoc_ke_go": {
+    "ten": "Thước kẻ gỗ",
+    "level": "THẤP",
+    "cssClass": "badge-thap",
+    "tip": "thân thiện môi trường và có thể sử dụng lâu dài."
+  },
+  "Got_but_chi_nhua": {
+    "ten": "Gọt bút chì nhựa",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Dùng loại bằng kim loại Nên chọn gọt bút chì bằng kim loại để tăng độ bền và giảm rác thải nhựa.\n"
+  },
+  "Hop_but_nhua": {
+    "ten": "Hộp bút nhựa",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Hạn chế hộp bút nhựa, ưu tiên hộp bút vải hoặc vật liệu tái sử dụng."
+  },
+  "Hop_but_vai": {
+    "ten": "Hộp bút vải",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Lựa chọn tuyệt vời! Có thể giặt sạch và sử dụng lâu dài, giảm rác thải."
+  },
+  "Bang_con_nhua": {
+    "ten": "Bảng con nhựa",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Giữ gìn và tái sử dụng bảng để kéo dài thời gian sử dụng, giảm rác thải nhựa."
+  },
+  "Ho_dan": {
+    "ten": "Hồ dán",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Sử dụng lượng vừa đủ, tránh lãng phí và hạn chế phát tán nhựa ra môi trường."
+  },
+  "Balo_nhua": {
+    "ten": "Balo nhua",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Ưu tiên balo vải hoặc vật liệu tái chế để giảm thiểu rác thải nhựa."
+  },
+  "Compa_nhua": {
+    "ten": "Compa nhựa",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Hạn chế compa nhựa, ưu tiên compa kim loại để sử dụng bền lâu hơn."
+  },
+  "Phan_viet_bang": {
+    "ten": "Phấn viết bảng",
+    "level": "THẤP",
+    "cssClass": "badge-thap",
+    "tip": "Lựa chọn tốt! Phấn viết bảng ít tạo rác thải nhựa hơn bút lông."
+  },
+  "Kem_que_go": {
+    "ten": "Kem que gỗ",
+    "level": "THẤP",
+    "cssClass": "badge-thap",
+    "tip": "Có thể tái sử dụng que gỗ làm đồ handmade, góp phần giảm rác thải."
+  },
+  "Khan_uot": {
+    "ten": "Khăn ướt",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Hạn chế khăn ướt dùng một lần, ưu tiên khăn vải có thể giặt lại."
+  },
+  "Khan_tay_vai": {
+    "ten": "Khăn tay vải",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Lựa chọn bền vững! Có thể giặt và dùng nhiều lần, giảm rác thải."
+  },
+  "Tui_vai_dung_do": {
+    "ten": "Túi vải dựng đồ",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Mang theo túi vải khi mua sắm để thay thế hoàn toàn túi nilon."
+  },
+  "Ghe_nhua": {
+    "ten": "Ghế nhựa",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Sử dụng lâu dài và bảo quản tốt để giảm nhu cầu thay mới."
+  },
+  "Ao_khoac_vai": {
+    "ten": "Áo khoác vải",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Ưu tiên chất liệu bền như cotton và sử dụng lâu dài để giảm tiêu dùng."
+  },
+  "Giay_vai": {
+    "ten": "Giấy vải",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Vệ sinh và bảo quản định kỳ để kéo dài tuổi thọ sản phẩm."
+  },
+  "Khau_trang_y_te": {
+    "ten": "Khẩu trang y tế",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Hạn chế dùng một lần, ưu tiên khẩu trang vải khi không cần thiết y tế.\n"
+  },
+  "Khau_trang_vai": {
+    "ten": "Khẩu trang vải",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Có thể giặt và tái sử dụng nhiều lần, giúp giảm rác thải đáng kể."
+  },
+  "Luoc_nhua": {
+    "ten": "Lược nhựa",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Ưu tiên lược gỗ hoặc tre để giảm sử dụng nhựa."
+  },
+  "Day_buoc_toc": {
+    "ten": "Dây buộc tóc",
+    "level": "THẤP",
+    "cssClass": "badge-thap",
+    "tip": "Giữ gìn và tái sử dụng nhiều lần, tránh làm rơi ra môi trường."
+  },
+  "Kinh_mat_gong_nhua": {
+    "ten": "Kính mắt",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Bảo quản tốt và thay tròng khi cần để kéo dài thời gian sử dụng."
+  },
+ "Tap_giay_van_phong_pham": {
+    "ten": "Tập giấy văn phòng phẩm",
+    "level": "THẤP",
+    "cssClass": "badge-thap",
+    "tip": "Mỗi trang giấy tiết kiệm là một cây xanh được bảo vệ. Tận dụng các trang còn trống trong tập cũ,viết kín hai mặt. Gom giấy vụn để tái chế, hạn chế in ấn khi không cần thiết bạn nhé!"
+  },
+ "Hop_nhua_thuc_pham": {
+    "ten": "Hộp nhựa, vỏ hộp thực phẩm",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Rửa sạch sẽ sau khi dùng để sẵn sàng tái chế như làm chậu ươm cây, đựng đồ dùng nhỏ hoặc phân loại riêng vào thùng rác tái chế để giảm gánh nặng cho môi trường bạn nhé!"
+  },
+  "Bao_bi_nhua_mem_Ni_long_mong": {
+    "ten": "Túi ni-lông/ vỏ bánh snack/ màng bọc",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Mất hàng trăm năm để phân hủy và gần như không thể tái chế. Hãy chuyển sang dùng bọc vở bằng vải/giấy tái sử dụng, bọc thực phẩm bằng hộp thủy tinh và hạn chế ăn đồ đóng gói sẵn nhé. Nhớ gom gọn, thắt nút lại trước khi loại bỏ để tránh bay lung tung ra môi trường!"
+  },
+  "Hop_giay_bao_bi_phuc_hop": {
+    "ten": "Hộp giấy bao bì phức hợp",
+    "level": "TRUNG BÌNH",
+    "cssClass": "badge-tb",
+    "tip": "Mở rộng 4 góc hộp sữa, súc sạch bằng nước, phơi khô và ép dẹt lại. Gom lại thành từng lốc để chuyển đến các nhà máy tái chế vỏ hộp sữa."
+  },
+ "Chai_nhua_chua_san_pham_tieu_dung_hang_ngay": {
+    "ten": "Chai nhựa chứa sản phẩm tiêu dùng hằng ngày",
+    "level": "CAO",
+    "cssClass": "badge-cao",
+    "tip": "Các chai nhựa cứng này rất bền. Bạn có thể rửa sạch để tái sử dụng làm bình tưới nước, chậu cây nhỏ, hoặc cắt làm ống cắm bút trước khi nghĩ đến việc vứt bỏ."
+},

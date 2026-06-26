@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giao diện Web Tương Tác Eco-Vision</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <style>
+        /* === CSS CHUNG === */
+        .history-list li {
+            background: white; padding: 12px 15px; margin-bottom: 10px; border-radius: 12px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-left: 5px solid #4caf50;
+        }
+        .item-info b { font-size: 14px; color: #333; }
+        .item-info span { font-size: 11px; color: #888; }
+        .badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; color: #fff; min-width: 70px; text-align: center; }
+        .empty-message { text-align: center; color: #777; font-style: italic; margin-top: 30px; font-size: 14px; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f2f1; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* === KHUNG ĐIỆN THOẠI === */
+        .phone-frame {
+            position: relative;
+            width: 374px; 
+            height: 540px; 
+            background-color: white; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: 40px; 
+            overflow: hidden; 
+        }
+
+        .interface-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('interface.png'); 
+            background-size: contain; 
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 1; 
+        }
+
+        /* === NÚT HOTSPOT ẨN === */
+        .action-btn {
+            position: absolute;
+            background: transparent; 
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 10; 
+        }
+
+        .action-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        #btn-login-main {
+            top: 41.5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 48%;
+            height: 10%;
+            border-radius: 20px;
+        }
+
+        #btn-guide { top: 88.8%; left: 24.5%; transform: translateX(-50%); width: 22%; height: 4.5%; }
+        #btn-history { top: 88.8%; left: 50%; transform: translateX(-50%); width: 22%; height: 4.5%; }
+        #btn-settings { top: 88.8%; left: 75.5%; transform: translateX(-50%); width: 22%; height: 4.5%; }
+
+        .btn-category { top: 73.5%; transform: translateX(-50%); width: 12%; height: 3%; border-radius: 50%; }
+        #btn-nhua { left: 32.5%; }
+        #btn-lon { left: 50%; }
+        #btn-giay { left: 67.5%; }
+
+        /* === OVERLAY VÀ NỘI DUNG === */
+        .screen-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5); 
+            z-index: 20; 
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            pointer-events: none;
+        }
+
+        .screen-overlay.open { 
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .overlay-content {
+            background-color: white;
+            width: 88%;
+            max-height: 85%;
+            border-radius: 20px;
+            padding: 25px 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .overlay-content h2 { color: #2e7d32; text-align: center; margin-top: 0; }
+        .overlay-content ol, .overlay-content ul { color: #555; }
+        .overlay-content ul { list-style: none; padding: 0; margin: 0; }
+        .overlay-content li { background: rgba(46, 125, 50, 0.05); margin-bottom: 10px; padding: 10px; border-radius: 5px; }
+
+        .close-btn { position: absolute; top: 15px; right: 15px; background: transparent; border: none; font-size: 1.4rem; font-weight: bold; color: #ff4d4d; cursor: pointer; transition: color 0.2s ease; z-index: 10; }
+        .close-btn:hover { color: #cc0000; }
+
+        /* === ĐỊNH KIỂU FORM ĐĂNG NHẬP === */
+        .login-form { display: flex; flex-direction: column; gap: 15px; }
+        .form-group { display: flex; flex-direction: column; gap: 5px; }
+        .form-label { font-weight: bold; color: #333; }
+        .form-input { padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; color: #555; }
+        .submit-btn { background-color: #2e7d32; color: white; padding: 15px; border: none; border-radius: 25px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 10px; transition: background-color 0.2s ease; }
+        .submit-btn:hover { background-color: #034833; }
+        /* ===== HIỆU ỨNG NỀN XANH CHO NHẬT KÝ ===== */
+
+        .diary-panel {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .diary-panel::before {
+            content: "";
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle,
+                rgba(76, 175, 80, 0.15) 0%,
+                rgba(76, 175, 80, 0) 75%
+            );
+            pointer-events: none;
+        }
+
+        .diary-panel::after {
+            content: "🌿 🌱 🍃";
+            position: absolute;
+            bottom: 20px;
+            left: 10px;
+            font-size: 100px;
+            opacity: 0.08;
+            transform: rotate(-12deg);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        <div class="interface-background"></div>
+
+        <button class="action-btn" id="btn-login-main" title="Đăng nhập"></button>
+        <button class="action-btn" id="btn-guide" title="Hướng dẫn"></button>
+        <button class="action-btn" id="btn-history" title="Lịch sử"></button>
+        <button class="action-btn" id="btn-settings" title="Nhật ký"></button>
+        
+        <button class="action-btn btn-category" id="btn-nhua" title="Nhựa"></button>
+        <button class="action-btn btn-category" id="btn-lon" title="Lon"></button>
+        <button class="action-btn btn-category" id="btn-giay" title="Giấy"></button>
+
+        <div class="screen-overlay" id="overlay-login">
+            <div class="overlay-content login-content">
+                <button class="close-btn" onclick="closeScreen('overlay-login')">X</button>
+                <h2>ĐĂNG NHẬP</h2>
+                <form id="login-form" class="login-form">
+                    <div class="form-group">
+                        <label class="form-label" for="full-name">Họ tên</label>
+                        <input type="text" id="full-name" class="form-input" placeholder="Họ và tên của bạn" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="unit">Đơn vị</label>
+                        <input type="text" id="unit" class="form-input" placeholder="Lớp / Đơn Vị" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="phone-number">SĐT</label>
+                        <input type="tel" id="phone-number" class="form-input" placeholder="Số điện thoại" required pattern="[0-9]{10}">
+                    </div>
+                    <button type="submit" class="submit-btn">ĐĂNG NHẬP</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="screen-overlay" id="overlay-guide">
+            <div class="overlay-content">
+                <button class="close-btn" onclick="closeScreen('overlay-guide')">X</button>
+                <h2>Hướng dẫn sử dụng</h2>
+                <ol>
+                    <li>Nhấn nút "Đăng nhập. Cung cấp thông tin người dùng".</li>
+                    <li>Cấp quyền camera.</li>
+                    <li>Đưa sản phẩm vào khung quét.</li>
+                    <li>Xem thông tin lượng CO2 và thông điệp xanh để bảo vệ môi trường.</li>
+                    <li>Bạn có thể gửi hình ảnh sản phẩm giúp nâng cấp mô hình AI.</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="screen-overlay" id="overlay-history">
+            <div class="overlay-content" style="width: 100%; height: 100%; max-height: 100%; border-radius: 0; padding: 0; display: flex; flex-direction: column;">
+                <div class="overlay-header" style="background-color: #2e7d32; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <h2 style="margin: 0; font-size: 18px; color: white;">⏳ Lịch sử quét</h2>
+                    <button class="close-btn" style="position: static; color: white; background: rgba(255, 255, 255, 0.2); padding: 6px 14px; border-radius: 15px; font-size: 12px;" onclick="closeScreen('overlay-history')">Đóng</button>
+                </div>
+                
+                <div style="background: #e8f5e9; padding: 15px; margin: 10px 20px 0 20px; border-radius: 12px; border: 1px solid #c8e6c9; text-align: center;">
+                    <span style="font-size: 14px; color: #2e7d32; font-weight: bold; display: block; margin-bottom: 5px;">🎯 ĐIỂM TRONG NGÀY</span>
+                   <div style="font-size: 13px; color: #333; margin-bottom: 8px; text-align: left; line-height: 1.6;">
+                        👤 <b>Họ tên:</b> <span id="user-name" style="color: #2e7d32; font-weight: bold;">-</span><br>
+                        🏫 <b>Lớp:</b> <span id="user-class" style="color: #2e7d32; font-weight: bold;">-</span><br>
+                        📞 <b>SĐT:</b> <span id="user-phone" style="color: #2e7d32; font-weight: bold;">-</span>
+                    </div>
+                    <b id="total-emulation-points" style="font-size: 24px; color: #1b5e20;">0</b> <span style="color: #2e7d32; font-weight: bold;">điểm</span>
+                </div>
+                
+                <div class="date-picker-container" style="background-color: #c8e6c9; padding: 10px 20px; display: block; align-items: center; justify-content: space-between; gap: 10px;">
+                    <label for="history-date" style="font-size: 13px; font-weight: bold; color: #1b5e20;">Chọn ngày xem:</label>
+                    <input type="date" id="history-date" class="date-input" style="border: 1px solid #4caf50; border-radius: 8px; padding: 5px 10px; font-weight: bold; color: #2e7d32; outline: none;">
+                </div>
+
+                <div class="overlay-content-scroll" style="flex: 1; overflow-y: auto; padding: 20px; background-color: #f1f8e9;">
+                    <ul class="history-list" id="log-list"></ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="screen-overlay" id="overlay-settings">
+            <div class="overlay-content" style="background-color: #f7f9fa; padding: 0; width: 100%; height: 100%; max-height: 100%; border-radius: 0; border: none; display: flex; flex-direction: column;">
+                
+                <div style="background-color: #ffffff; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #edf2f4; flex-shrink: 0;">
+                    <h2 style="color: #1a1a1a; font-size: 16px; font-weight: 700; margin: 0;">📊 Nhật ký giảm Carbon</h2>
+                    <button class="close-btn" style="position: static; color: white; background: #ff4d4d; padding: 6px 14px; border-radius: 15px; font-size: 12px; cursor: pointer; border: none;" onclick="closeScreen('overlay-settings')">Đóng</button>
+                </div>
+            <div class="diary-panel"
+                style="flex: 1; overflow-y: auto; padding: 16px; background-color: #f7f9fa;">
+                    
+                    <div id="student-info-box" style="background: #ffffff; border-radius: 14px; padding: 12px 16px; margin-bottom: 12px; border: 1px solid #eef2f3; font-size: 13px; color: #555; line-height: 1.6; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            👤 Họ tên: <b id="chart-user-name" style="color: #2e7d32;">Chưa đăng nhập</b><br>
+                            🏫 Lớp: <b id="chart-user-class" style="color: #2e7d32;">Chưa rõ</b><br>
+                            📞 SĐT: <b id="chart-user-phone" style="color: #2e7d32;">Chưa rõ</b>
+                        </div>
+                        <div style="background: #e8f5e9; border: 1px solid #c8e6c9; padding: 6px 12px; border-radius: 10px; text-align: center; min-width: 80px; flex-shrink: 0;">
+                            <span style="font-size: 9px; font-weight: bold; color: #2e7d32; display: block; line-height: 1.2;">TỔNG 7 NGÀY</span>
+                            <b id="chart-total-points" style="font-size: 16px; color: #1b5e20;">0</b><span style="font-size: 11px; color: #1b5e20; font-weight: bold;"> đ</span>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #ffffff; border-radius: 18px; padding: 16px; margin-bottom: 14px; border: 1px solid #eef2f3; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
+                        <span style="font-size: 11px; color: #8e8e93; font-weight: 600; display: block; margin-bottom: 10px;">📈 BIỂU ĐỒ DẤU CHÂN CARBON (7 NGÀY GẦN NHẤT)</span>
+                        <div style="width: 100%; height: 180px; position: relative;">
+                            <canvas id="carbonLineChart"></canvas>
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cấu hình Ngày hệ thống hiện hành định sẵn
+        // Lấy ngày hiện tại của thiết bị
+        const today = new Date();
+        const todayISO = today.getFullYear() + "-" +
+            String(today.getMonth() + 1).padStart(2, "0") + "-" +
+            String(today.getDate()).padStart(2, "0");
+        const historyDateInput = document.getElementById('history-date');
+        if (historyDateInput) historyDateInput.value = todayISO;
+
+        // Hàm hỗ trợ lấy số điện thoại hiện tại an toàn
+        function getCurrentUserPhone() {
+            return localStorage.getItem('current_user_phone') || 'GUEST';
+        }
+
+        // Sự kiện điều hướng đóng mở cơ bản
+        document.getElementById('btn-guide').addEventListener('click', function() { openScreen('overlay-guide'); });
+        document.getElementById('btn-login-main').addEventListener('click', function() { openScreen('overlay-login'); });
+
+        // ==========================================
+        // 1. XỬ LÝ MÀN HÌNH LỊCH SỬ - TÍNH ĐIỂM THEO NGÀY CHỌN
+        // ==========================================
+        function loadHistoryByDate(selectedDate) {
+            const logList = document.getElementById('log-list');
+            if (!logList) return;
+            logList.innerHTML = '';
+            const userPhone = getCurrentUserPhone();
+            const localStorageKey = `eco_diary_${userPhone}_${selectedDate}`;
+            let diary = JSON.parse(localStorage.getItem(localStorageKey));
+
+            if (diary === null && userPhone === 'GUEST') {
+                if (selectedDate === todayISO) {
+                    diary = [
+                        { ten: "Cốc nhựa", level: "CAO", time: "17:51" },
+                        { ten: "Cốc nhựa", level: "CAO", time: "18:00" }
+                    ];
+                } else if (selectedDate === "2026-06-19") {
+                    diary = [
+                        { ten: "Tiêu dùng lãng phí", level: "CAO", time: "11:13" },
+                        { ten: "Bình nước cá nhân inox", level: "CAO", time: "10:34" },
+                        { ten: "Quần áo từ sợi tự nhiên", level: "THẤP", time: "10:33" }
+                    ];
+                } else {
+                    diary = [];
+                }
+            } else if (diary === null) {
+                diary = [];
+            }
+
+            let dayPoints = 0; 
+
+            if (diary.length === 0) {
+                logList.innerHTML = '<p class="empty-message">Không có dữ liệu hoạt động trong ngày này.</p>';
+            } else {
+                diary.forEach(item => {
+                    let pointText = '';
+                    let badgeColor = '';
+                    
+                    if (item.level === 'THẤP') {
+                        dayPoints += 10;
+                        pointText = '+10 điểm';
+                        badgeColor = '#4caf50';
+                    } else if (item.level === 'TRUNG BÌNH') {
+                        dayPoints += 5;
+                        pointText = '+5 điểm';
+                        badgeColor = '#ff9800';
+                    } else if (item.level === 'CAO') {
+                        dayPoints -= 5;
+                        pointText = '-5 điểm';
+                        badgeColor = '#f44336';
+                    }
+
+                    const li = document.createElement('li');
+                    li.style.borderLeft = `5px solid ${badgeColor}`;
+                    li.innerHTML = `
+                        <div class="item-info">
+                            <b>${item.ten}</b><br>
+                            <span style="color: ${item.level==='CAO'?'#f44336':'#4caf50'}; font-weight: bold;">${pointText}</span><br>
+                            <span>Thời gian quét: ${item.time}</span>
+                        </div>
+                        <span class="badge" style="background-color: ${badgeColor};">${item.level}</span>
+                    `;
+                    logList.appendChild(li);
+                });
+            }
+
+            const scoreElement = document.getElementById('total-emulation-points');
+            if (scoreElement) scoreElement.textContent = dayPoints;
+        }
+
+        // Kích hoạt nút Lịch sử
+        document.getElementById('btn-history').addEventListener('click', function() {
+            openScreen('overlay-history');
+            if (historyDateInput) historyDateInput.value = todayISO;
+
+            document.getElementById('user-name').textContent = localStorage.getItem('current_user_name') || 'Chưa đăng nhập';
+            document.getElementById('user-class').textContent = localStorage.getItem('current_user_unit') || 'Chưa rõ';
+            document.getElementById('user-phone').textContent = localStorage.getItem('current_user_phone') || 'Chưa rõ';
+            
+            loadHistoryByDate(todayISO); 
+        });
+
+        if (historyDateInput) {
+            historyDateInput.addEventListener('change', function() { loadHistoryByDate(this.value); });
+        }
+
+
+     
+        // ==========================================
+        // 2. XỬ LÝ MÀN HÌNH NHẬT KÝ (ĐÃ LÀM SẠCH - BỎ XU HƯỚNG)
+        // ==========================================
+        document.getElementById('btn-settings').addEventListener('click', function() { 
+            openScreen('overlay-settings'); 
+            
+            const currentName = localStorage.getItem('current_user_name') || 'Chưa đăng nhập';
+            const currentClass = localStorage.getItem('current_user_unit') || 'Chưa rõ';
+            const currentPhone = localStorage.getItem('current_user_phone') || 'Chưa rõ';
+            
+            document.getElementById('chart-user-name').textContent = currentName;
+            document.getElementById('chart-user-class').textContent = currentClass;
+            document.getElementById('chart-user-phone').textContent = currentPhone;
+
+            const userPhone = getCurrentUserPhone();
+            const labels = [];
+            const singleDayPointsData = []; 
+            let sumThisWeek = 0; 
+
+            // Vòng lặp lấy dữ liệu tiến độ 7 ngày qua để vẽ biểu đồ
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date(todayISO);
+                d.setDate(d.getDate() - i);
+                const localDateISO = d.toISOString().split('T')[0];
+                
+                const day = d.getDate().toString().padStart(2, '0');
+                const month = (d.getMonth() + 1).toString().padStart(2, '0');
+                labels.push(`${day}/${month}`);
+                
+                const localStorageKey = `eco_diary_${userPhone}_${localDateISO}`;
+                let diary = JSON.parse(localStorage.getItem(localStorageKey));
+                
+                if (diary === null && userPhone === 'GUEST') {
+                    if (localDateISO === todayISO) {
+                        diary = [
+                            { ten: "Cốc nhựa", level: "CAO", time: "17:51" },
+                            { ten: "Cốc nhựa", level: "CAO", time: "18:00" }
+                        ];
+                    } else if (localDateISO === "2026-06-19") {
+                        diary = [{ ten: "Quần áo sợi tự nhiên", level: "THẤP", time: "10:33" }];
+                    } else {
+                        diary = [];
+                    }
+                } else if (diary === null) {
+                    diary = [];
+                }
+                
+                let currentDayScore = 0;
+                diary.forEach(item => {
+                    if (item.level === 'THẤP') currentDayScore += 10;
+                    else if (item.level === 'TRUNG BÌNH') currentDayScore += 5;
+                    else if (item.level === 'CAO') currentDayScore -= 5;
+                });
+                
+                if (userPhone === 'GUEST') {
+                    if (localDateISO === "2026-06-19") currentDayScore = 5; 
+                    if (localDateISO === "2026-06-20") currentDayScore = 10;
+                    if (localDateISO === "2026-06-21") currentDayScore = 10;
+                    if (localDateISO === "2026-06-22") currentDayScore = -10;
+                }
+
+                sumThisWeek += currentDayScore; 
+                singleDayPointsData.push(currentDayScore); 
+            }
+
+            // Hiển thị tổng điểm tích lũy tuần này
+            const chartScoreElement = document.getElementById('chart-total-points');
+            if (chartScoreElement) {
+                chartScoreElement.textContent = sumThisWeek;
+            }
+
+            // Khởi chạy vẽ biểu đồ đường tiến độ ngày bằng Chart.js
+            setTimeout(() => {
+                const canvasEl = document.getElementById('carbonLineChart');
+                if (!canvasEl) return;
+                const ctx = canvasEl.getContext('2d');
+                
+                if (window.myCarbonChart) { window.myCarbonChart.destroy(); }
+                
+                window.myCarbonChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Điểm tiến độ ngày',
+                            data: singleDayPointsData, 
+                            borderColor: '#2e7d32',
+                            backgroundColor: 'rgba(76, 175, 80, 0.05)',
+                            borderWidth: 2.5,
+                            tension: 0.15,
+                            pointBackgroundColor: '#ffffff',
+                            pointBorderColor: '#2e7d32',
+                            pointBorderWidth: 2,
+                            pointRadius: 5,
+                            pointHoverRadius: 7
+                        }]
+                    },
+                    plugins: [ChartDataLabels],
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: { padding: { top: 25, left: 15, right: 15, bottom: 5 } },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: false },
+                            datalabels: {
+                                align: 'top',
+                                anchor: 'end',
+                                offset: 4,
+                                color: '#1b5e20',
+                                font: { size: 11, weight: 'bold', family: 'Arial' },
+                                formatter: function(value) { return value + " đ"; }
+                            }
+                        },
+                        scales: {
+                            y: { 
+                                display: false, 
+                                grid: { display: false },
+                                suggestedMin: -15, 
+                                suggestedMax: 15
+                            },
+                            x: { grid: { display: false }, ticks: { font: { size: 10, weight: 'bold' }, color: '#8e8e93' } }
+                        }
+                    }
+                });
+            }, 150);
+        });
+
+        // ==========================================
+        // KHÔI PHỤC HOÀN TOÀN LOGIC ĐĂNG NHẬP GỐC
+       
+        // Sự kiện Đăng nhập và lưu LocalStorage đồng bộ với app.html
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fullName = document.getElementById('full-name').value;
+            const unit = document.getElementById('unit').value;
+            const phoneNumber = document.getElementById('phone-number').value;
+
+            // Đồng bộ Key lưu trữ với app.html
+            localStorage.setItem('current_user_name', fullName);
+            localStorage.setItem('current_user_unit', unit);
+            localStorage.setItem('current_user_phone', phoneNumber);
+            
+            alert(`Chào mừng ${fullName} (${unit}) đã đăng nhập thành công!`);
+            closeScreen('overlay-login');
+            
+            // Tự động chuyển sang màn hình quét thực tế sau khi đăng nhập
+            window.location.href = 'app.html';
+        });
+
+        // Mở màn hình đăng nhập khi bấm nút chính giữa khung điện thoại
+        document.getElementById('btn-login-main').addEventListener('click', function() {
+            openScreen('overlay-login');
+        });
+
+        // Điều hướng các nút chức năng khác
+        document.getElementById('btn-guide').addEventListener('click', function() { openScreen('overlay-guide'); });
+        document.getElementById('btn-history').addEventListener('click', function() { openScreen('overlay-history'); loadHistoryData(); });
+        document.getElementById('btn-settings').addEventListener('click', function() { openScreen('overlay-settings'); loadLogData(); });
+
+        // Click các nút danh mục nhanh
+        document.getElementById('btn-nhua').addEventListener('click', function() { alert("Thông tin: Rác thải Nhựa có lượng Carbon cao, cần hạn chế sử dụng!"); });
+        document.getElementById('btn-lon').addEventListener('click', function() { alert("Thông tin: Lon kim loại có lượng Carbon trung bình, hãy tái chế!"); });
+        document.getElementById('btn-giay').addEventListener('click', function() { alert("Thông tin: Sản phẩm Giấy thân thiện, lượng Carbon thấp!"); });
+
+        // Quản lý đóng mở overlay
+        function openScreen(overlayId) {
+            closeAllScreens();
+            const target = document.getElementById(overlayId);
+            if (target) target.classList.add('open');
+        }
+        function closeScreen(overlayId) {
+            const target = document.getElementById(overlayId);
+            if (target) target.classList.remove('open');
+        }
+        function closeAllScreens() {
+            const overlays = document.querySelectorAll('.screen-overlay');
+            overlays.forEach(overlay => { overlay.classList.remove('open'); });
+        }
+
+        // Hàm hiển thị dữ liệu lịch sử và nhật ký từ LocalStorage (nếu có)
+        function loadHistoryData() {
+            const name = localStorage.getItem('current_user_name') || '-';
+            const unit = localStorage.getItem('current_user_unit') || '-';
+            const user_phone = localStorage.getItem('current_user_phone') || 'GUEST';
+            
+            if(document.getElementById('user-name')) document.getElementById('user-name').textContent = name;
+            if(document.getElementById('user-class')) document.getElementById('user-class').textContent = unit;
+            if(document.getElementById('user-phone')) document.getElementById('user-phone').textContent = phone;
+        }
+    
+    </script>
+</body>
+</html>
